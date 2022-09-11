@@ -1,0 +1,925 @@
+{
+  "author": "",
+  "category": "General",
+  "description": "Originally automatically extracted from events of the project",
+  "extensionNamespace": "",
+  "fullName": "MovingPlatform",
+  "helpPath": "",
+  "iconUrl": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0ibWRpLWFycm93LXVwLWRvd24iIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTcuNDUsMTcuNTVMMTIsMjNMNi41NSwxNy41NUw3Ljk2LDE2LjE0TDExLDE5LjE3VjQuODNMNy45Niw3Ljg2TDYuNTUsNi40NUwxMiwxTDE3LjQ1LDYuNDVMMTYuMDQsNy44NkwxMyw0LjgzVjE5LjE3TDE2LjA0LDE2LjE0TDE3LjQ1LDE3LjU1WiIgLz48L3N2Zz4=",
+  "name": "MovingPlatform",
+  "previewIconUrl": "https://resources.gdevelop-app.com/assets/Icons/arrow-up-down.svg",
+  "shortDescription": "",
+  "version": "1.0.1",
+  "tags": [
+    "Platforms",
+    "move",
+    "Down",
+    "Up"
+  ],
+  "authorIds": [
+    "ZShmW1xkW7WWl9AkB78VITJMiTw1"
+  ],
+  "dependencies": [],
+  "eventsFunctions": [],
+  "eventsBasedBehaviors": [
+    {
+      "description": "",
+      "fullName": "(Moving Platform) Add moving platform",
+      "name": "MovingPlatform",
+      "objectType": "Sprite",
+      "eventsFunctions": [
+        {
+          "description": "Create platforms",
+          "fullName": "Create moving platforms",
+          "functionType": "Action",
+          "group": "",
+          "name": "CreateMovingPlatforms",
+          "private": false,
+          "sentence": "Create at: _PARAM0_ a total of:_PARAM4_ moving platforms with this sprite: _PARAM2_ and direction: _PARAM5_",
+          "events": [
+            {
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "value": "DepartScene"
+                  },
+                  "parameters": [
+                    ""
+                  ]
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "value": "ModVarScene"
+                  },
+                  "parameters": [
+                    "__MovingPlatformsCounter__",
+                    "=",
+                    "1"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ModVarScene"
+                  },
+                  "parameters": [
+                    "__CalculatedQtySapce__",
+                    "=",
+                    "(Object.Height()/GetArgumentAsNumber(\"MovingQuantity\"))"
+                  ]
+                },
+                {
+                  "type": {
+                    "value": "ChangePlan"
+                  },
+                  "parameters": [
+                    "Object",
+                    "=",
+                    "1"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BuiltinCommonInstructions::Repeat",
+              "repeatExpression": "GetArgumentAsNumber(\"MovingQuantity\")",
+              "conditions": [],
+              "actions": [],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "\"Up\"",
+                        "=",
+                        "GetArgumentAsString(\"Direction\")"
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "Create"
+                          },
+                          "parameters": [
+                            "",
+                            "MovingPlatform",
+                            "Object.PointX(\"Bottom\")",
+                            "Object.PointY(\"Bottom\")-(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapce__))",
+                            "\"\""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "LinkedObjects::LinkObjects"
+                          },
+                          "parameters": [
+                            "",
+                            "MovingPlatform",
+                            "Object"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ModVarObjetTxt"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformDirection__",
+                            "=",
+                            "\"Up\""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "SetObjectVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformWalkable__",
+                            "True"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ActivateBehavior"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "Platform",
+                            "yes"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ChangePlan"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "=",
+                            "Object.ZOrder()+1"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "BuiltinCommonInstructions::CompareStrings"
+                      },
+                      "parameters": [
+                        "\"Down\"",
+                        "=",
+                        "GetArgumentAsString(\"Direction\")"
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "Create"
+                          },
+                          "parameters": [
+                            "",
+                            "MovingPlatform",
+                            "Object.PointX(\"Top\")",
+                            "Object.PointY(\"Top\")+(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapce__))",
+                            "\"\""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "LinkedObjects::LinkObjects"
+                          },
+                          "parameters": [
+                            "",
+                            "MovingPlatform",
+                            "Object"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ModVarObjetTxt"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformDirection__",
+                            "=",
+                            "\"Down\""
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "SetObjectVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformWalkable__",
+                            "True"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ActivateBehavior"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "Platform",
+                            "yes"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ChangePlan"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "=",
+                            "Object.ZOrder()+1"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "BuiltinCommonInstructions::Standard",
+                  "conditions": [],
+                  "actions": [
+                    {
+                      "type": {
+                        "value": "ModVarScene"
+                      },
+                      "parameters": [
+                        "__MovingPlatformsCounter__",
+                        "+",
+                        "1"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Object",
+              "longDescription": "",
+              "name": "Object",
+              "optional": false,
+              "supplementaryInformation": "Sprite",
+              "type": "object"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Behavior",
+              "longDescription": "",
+              "name": "Behavior",
+              "optional": false,
+              "supplementaryInformation": "MovingPlatform::MovingPlatform",
+              "type": "behavior"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "",
+              "longDescription": "",
+              "name": "MovingPlatform",
+              "optional": false,
+              "supplementaryInformation": "Sprite",
+              "type": "objectList"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "",
+              "longDescription": "",
+              "name": "Platform",
+              "optional": false,
+              "supplementaryInformation": "PlatformBehavior::PlatformBehavior",
+              "type": "behavior"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "How many moving platforms",
+              "longDescription": "",
+              "name": "MovingQuantity",
+              "optional": false,
+              "supplementaryInformation": "[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\"]",
+              "type": "expression"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Direction of the moving platforms",
+              "longDescription": "",
+              "name": "Direction",
+              "optional": false,
+              "supplementaryInformation": "[\"Down\",\"Up\"]",
+              "type": "stringWithSelector"
+            }
+          ],
+          "objectGroups": []
+        },
+        {
+          "description": "Move the platforms of this base",
+          "fullName": "Move platforms",
+          "functionType": "Action",
+          "group": "",
+          "name": "MovePlatforms",
+          "private": false,
+          "sentence": "From this base:_PARAM0_ move this platform:_PARAM2_ move at: _PARAM4_ per second",
+          "events": [
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "name": "Moving Platforms",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "MovingPlatform",
+                  "conditions": [],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "VarObjetTxt"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformDirection__",
+                            "=",
+                            "\"Up\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "AddForceAL"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "270",
+                            "GetArgumentAsNumber(\"Speed\")",
+                            ""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "VarObjetTxt"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformDirection__",
+                            "=",
+                            "\"Down\""
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "AddForceAL"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "90",
+                            "GetArgumentAsNumber(\"Speed\")",
+                            ""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "ObjectVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformWalkable__",
+                            "True"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "CollisionPoint"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Object.PointX(\"Top\")",
+                                "Object.PointY(\"Top\")"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "CollisionNP"
+                              },
+                              "parameters": [
+                                "Object",
+                                "MovingPlatform",
+                                "",
+                                "",
+                                ""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "VarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Up\""
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Down\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()-1"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                ""
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "CollisionPoint"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Object.PointX(\"Bottom\")",
+                                "Object.PointY(\"Bottom\")"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "CollisionNP"
+                              },
+                              "parameters": [
+                                "Object",
+                                "MovingPlatform",
+                                "",
+                                "",
+                                ""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "VarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Down\""
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Up\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()-1"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                ""
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "ObjectVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformWalkable__",
+                            "False"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "CollisionPoint"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Object.PointX(\"Top\")",
+                                "Object.PointY(\"Top\")"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "CollisionNP"
+                              },
+                              "parameters": [
+                                "Object",
+                                "MovingPlatform",
+                                "",
+                                "",
+                                ""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "VarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Up\""
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Down\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()+1"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "True"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [
+                            {
+                              "type": {
+                                "value": "CollisionPoint"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Object.PointX(\"Bottom\")",
+                                "Object.PointY(\"Bottom\")"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "CollisionNP"
+                              },
+                              "parameters": [
+                                "Object",
+                                "MovingPlatform",
+                                "",
+                                "",
+                                ""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "VarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Down\""
+                              ]
+                            }
+                          ],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Up\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()+1"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "True"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "parameters": []
+            },
+            {
+              "colorB": 228,
+              "colorG": 176,
+              "colorR": 74,
+              "creationTime": 0,
+              "name": "Change color and enable/disable platform",
+              "source": "",
+              "type": "BuiltinCommonInstructions::Group",
+              "events": [],
+              "parameters": []
+            },
+            {
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "Object",
+              "conditions": [],
+              "actions": [],
+              "events": [
+                {
+                  "type": "BuiltinCommonInstructions::ForEach",
+                  "object": "MovingPlatform",
+                  "conditions": [
+                    {
+                      "type": {
+                        "value": "LinkedObjects::PickObjectsLinkedTo"
+                      },
+                      "parameters": [
+                        "",
+                        "MovingPlatform",
+                        "Object",
+                        ""
+                      ]
+                    }
+                  ],
+                  "actions": [],
+                  "events": [
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "ObjectVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformWalkable__",
+                            "True"
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "ActivateBehavior"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "Platform",
+                            "yes"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ChangeColor"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "\"255;255;255\""
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "ObjectVariableAsBoolean"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "__MovingPlatformWalkable__",
+                            "False"
+                          ]
+                        }
+                      ],
+                      "actions": [
+                        {
+                          "type": {
+                            "value": "ActivateBehavior"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "Platform",
+                            "no"
+                          ]
+                        },
+                        {
+                          "type": {
+                            "value": "ChangeColor"
+                          },
+                          "parameters": [
+                            "MovingPlatform",
+                            "\"74;74;74\""
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "parameters": [
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Object",
+              "longDescription": "",
+              "name": "Object",
+              "optional": false,
+              "supplementaryInformation": "Sprite",
+              "type": "object"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Behavior",
+              "longDescription": "",
+              "name": "Behavior",
+              "optional": false,
+              "supplementaryInformation": "MovingPlatform::MovingPlatform",
+              "type": "behavior"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "The platform to move",
+              "longDescription": "",
+              "name": "MovingPlatform",
+              "optional": false,
+              "supplementaryInformation": "Sprite",
+              "type": "objectList"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Platform behavior",
+              "longDescription": "",
+              "name": "Platform",
+              "optional": false,
+              "supplementaryInformation": "PlatformBehavior::PlatformBehavior",
+              "type": "behavior"
+            },
+            {
+              "codeOnly": false,
+              "defaultValue": "",
+              "description": "Number of pixels to move per second",
+              "longDescription": "",
+              "name": "Speed",
+              "optional": false,
+              "supplementaryInformation": "",
+              "type": "expression"
+            }
+          ],
+          "objectGroups": []
+        }
+      ],
+      "propertyDescriptors": []
+    }
+  ]
+}
