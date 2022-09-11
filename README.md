@@ -1,2 +1,2 @@
 # Moving-Platforms-Extension
-Easy with 2 Sprites create moving platforms down/Up for now
+Easy with 2 Sprites create moving platforms Down/Up for now
