@@ -9,7 +9,7 @@
   "name": "MovingPlatform",
   "previewIconUrl": "https://resources.gdevelop-app.com/assets/Icons/arrow-up-down.svg",
   "shortDescription": "- Create a Sprite to use as base for the moving platforms.\n- Create a Sprite to use as moving platform.",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "tags": [
     "Platforms",
     "move",
@@ -37,7 +37,7 @@
           "group": "",
           "name": "CreateMovingPlatforms",
           "private": false,
-          "sentence": "Create at: _PARAM0_ a total of:_PARAM4_ moving platforms with this sprite: _PARAM2_ and direction: _PARAM5_ debug: _PARAM6_",
+          "sentence": "Create at: _PARAM0_ a total of:_PARAM4_ moving platforms with this sprite: _PARAM2_ and direction: _PARAM5_",
           "events": [
             {
               "type": "BuiltinCommonInstructions::Standard",
@@ -91,25 +91,6 @@
                     "=",
                     "1"
                   ]
-                },
-                {
-                  "type": {
-                    "value": "TextObject::String"
-                  },
-                  "parameters": [
-                    "Debug",
-                    "=",
-                    "VariableString(__MovingPlatformsCounter__)+VariableString(__CalculatedQtySapceY__)"
-                  ]
-                },
-                {
-                  "type": {
-                    "value": "TextObject::ChangeColor"
-                  },
-                  "parameters": [
-                    "Debug",
-                    "\"255;255;255\""
-                  ]
                 }
               ]
             },
@@ -128,7 +109,7 @@
                       },
                       "parameters": [
                         "mod(Variable(__MovingPlatformsCounter__),2)",
-                        "=",
+                        "!=",
                         "0"
                       ]
                     }
@@ -136,6 +117,7 @@
                   "actions": [],
                   "events": [
                     {
+                      "folded": true,
                       "type": "BuiltinCommonInstructions::Standard",
                       "conditions": [
                         {
@@ -163,122 +145,7 @@
                                 "",
                                 "MovingPlatform",
                                 "Object.PointX(\"Top\")",
-                                "Object.PointY(\"Top\")+(Variable(__MovingPlatformsCounter__)+1)*Variable(__CalculatedQtySapceY__)",
-                                "\"\""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "value": "LinkedObjects::LinkObjects"
-                              },
-                              "parameters": [
-                                "",
-                                "MovingPlatform",
-                                "Object"
-                              ]
-                            },
-                            {
-                              "type": {
-                                "value": "ModVarObjetTxt"
-                              },
-                              "parameters": [
-                                "MovingPlatform",
-                                "__MovingPlatformDirection__",
-                                "=",
-                                "\"Down\""
-                              ]
-                            },
-                            {
-                              "type": {
-                                "value": "SetObjectVariableAsBoolean"
-                              },
-                              "parameters": [
-                                "MovingPlatform",
-                                "__MovingPlatformWalkable__",
-                                "False"
-                              ]
-                            },
-                            {
-                              "type": {
-                                "value": "ActivateBehavior"
-                              },
-                              "parameters": [
-                                "MovingPlatform",
-                                "Platform",
-                                "no"
-                              ]
-                            },
-                            {
-                              "type": {
-                                "value": "ChangePlan"
-                              },
-                              "parameters": [
-                                "MovingPlatform",
-                                "=",
-                                "Object.ZOrder()-1"
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "BuiltinCommonInstructions::CompareNumbers"
-                      },
-                      "parameters": [
-                        "mod(Variable(__MovingPlatformsCounter__),2)",
-                        "!=",
-                        "0"
-                      ]
-                    }
-                  ],
-                  "actions": [],
-                  "events": [
-                    {
-                      "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [
-                        {
-                          "type": {
-                            "value": "BuiltinCommonInstructions::CompareStrings"
-                          },
-                          "parameters": [
-                            "\"Up\"",
-                            "=",
-                            "GetArgumentAsString(\"Direction\")"
-                          ]
-                        }
-                      ],
-                      "actions": [
-                        {
-                          "type": {
-                            "value": "TextObject::ChangeColor"
-                          },
-                          "parameters": [
-                            "Debug",
-                            "\"255;255;255\""
-                          ]
-                        }
-                      ],
-                      "events": [
-                        {
-                          "type": "BuiltinCommonInstructions::Standard",
-                          "conditions": [],
-                          "actions": [
-                            {
-                              "type": {
-                                "value": "Create"
-                              },
-                              "parameters": [
-                                "",
-                                "MovingPlatform",
-                                "Object.PointX(\"Top\")",
-                                "Object.PointY(\"Top\")+Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceY__)",
+                                "Object.PointY(\"Top\")",
                                 "\"\""
                               ]
                             },
@@ -333,6 +200,348 @@
                                 "Object.ZOrder()+1"
                               ]
                             }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Top\")",
+                                    "=",
+                                    "Object.PointY(\"Top\")+ Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceY__)"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "folded": true,
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "\"Down\"",
+                            "=",
+                            "GetArgumentAsString(\"Direction\")"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "Create"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object.PointX(\"Top\")",
+                                "Object.PointY(\"Top\")",
+                                "\"\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "LinkedObjects::LinkObjects"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Down\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "True"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ActivateBehavior"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Platform",
+                                "yes"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()+1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Top\")",
+                                    "=",
+                                    "Object.PointY(\"Top\")+ Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceY__)"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "\"Left\"",
+                            "=",
+                            "GetArgumentAsString(\"Direction\")"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "Create"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object.PointX(\"Left\")",
+                                "Object.PointY(\"Left\")",
+                                "\"\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "LinkedObjects::LinkObjects"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Left\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "True"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ActivateBehavior"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Platform",
+                                "yes"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()+1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Left\")+(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceX__))+(MovingPlatform.Width()/GetArgumentAsNumber(\"Quantity\"))",
+                                    "=",
+                                    "Object.PointY(\"Left\")"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BuiltinCommonInstructions::Standard",
+                      "conditions": [
+                        {
+                          "type": {
+                            "value": "BuiltinCommonInstructions::CompareStrings"
+                          },
+                          "parameters": [
+                            "\"Right\"",
+                            "=",
+                            "GetArgumentAsString(\"Direction\")"
+                          ]
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
+                        {
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "Create"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object.PointX(\"Right\")",
+                                "Object.PointY(\"Right\")",
+                                "\"\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "LinkedObjects::LinkObjects"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Right\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "True"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ActivateBehavior"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Platform",
+                                "yes"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()+1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Right\")-(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceX__))-(MovingPlatform.Width()/GetArgumentAsNumber(\"Quantity\"))",
+                                    "=",
+                                    "Object.PointY(\"Left\")"
+                                  ]
+                                }
+                              ]
+                            }
                           ]
                         }
                       ]
@@ -340,7 +549,6 @@
                   ]
                 },
                 {
-                  "disabled": true,
                   "type": "BuiltinCommonInstructions::Standard",
                   "conditions": [
                     {
@@ -357,6 +565,7 @@
                   "actions": [],
                   "events": [
                     {
+                      "folded": true,
                       "type": "BuiltinCommonInstructions::Standard",
                       "conditions": [
                         {
@@ -384,7 +593,7 @@
                                 "",
                                 "MovingPlatform",
                                 "Object.PointX(\"Top\")",
-                                "Object.PointY(\"Top\")+Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceY__)",
+                                "Object.PointY(\"Top\")",
                                 "\"\""
                               ]
                             },
@@ -439,269 +648,348 @@
                                 "Object.ZOrder()-1"
                               ]
                             }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Top\")",
+                                    "=",
+                                    "Object.PointY(\"Top\")+(Variable(__MovingPlatformsCounter__)+1)*Variable(__CalculatedQtySapceY__)"
+                                  ]
+                                }
+                              ]
+                            }
                           ]
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
+                    },
                     {
-                      "type": {
-                        "value": "BuiltinCommonInstructions::CompareStrings"
-                      },
-                      "parameters": [
-                        "\"Down\"",
-                        "=",
-                        "GetArgumentAsString(\"Direction\")"
-                      ]
-                    }
-                  ],
-                  "actions": [],
-                  "events": [
-                    {
+                      "folded": true,
                       "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [],
-                      "actions": [
+                      "conditions": [
                         {
                           "type": {
-                            "value": "Create"
+                            "value": "BuiltinCommonInstructions::CompareStrings"
                           },
                           "parameters": [
-                            "",
-                            "MovingPlatform",
-                            "Object.PointX(\"Top\")",
-                            "Object.PointY(\"Top\")+(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceY__))",
-                            "\"\""
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "LinkedObjects::LinkObjects"
-                          },
-                          "parameters": [
-                            "",
-                            "MovingPlatform",
-                            "Object"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ModVarObjetTxt"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "__MovingPlatformDirection__",
+                            "\"Down\"",
                             "=",
-                            "\"Down\""
+                            "GetArgumentAsString(\"Direction\")"
                           ]
-                        },
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
                         {
-                          "type": {
-                            "value": "SetObjectVariableAsBoolean"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "__MovingPlatformWalkable__",
-                            "True"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ActivateBehavior"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "Platform",
-                            "yes"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ChangePlan"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "=",
-                            "Object.ZOrder()+1"
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "Create"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object.PointX(\"Top\")",
+                                "Object.PointY(\"Top\")",
+                                "\"\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "LinkedObjects::LinkObjects"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Up\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "False"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ActivateBehavior"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Platform",
+                                "no"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()-1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Top\")",
+                                    "=",
+                                    "Object.PointY(\"Top\")+(Variable(__MovingPlatformsCounter__)+1)*Variable(__CalculatedQtySapceY__)"
+                                  ]
+                                }
+                              ]
+                            }
                           ]
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "folded": true,
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "BuiltinCommonInstructions::CompareStrings"
-                      },
-                      "parameters": [
-                        "\"Left\"",
-                        "=",
-                        "GetArgumentAsString(\"Direction\")"
-                      ]
-                    }
-                  ],
-                  "actions": [],
-                  "events": [
+                    },
                     {
                       "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [],
-                      "actions": [
+                      "conditions": [
                         {
                           "type": {
-                            "value": "Create"
+                            "value": "BuiltinCommonInstructions::CompareStrings"
                           },
                           "parameters": [
-                            "",
-                            "MovingPlatform",
-                            "Object.PointX(\"Left\")+(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceX__))",
-                            "Object.PointY(\"Left\")",
-                            "\"\""
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "LinkedObjects::LinkObjects"
-                          },
-                          "parameters": [
-                            "",
-                            "MovingPlatform",
-                            "Object"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ModVarObjetTxt"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "__MovingPlatformDirection__",
+                            "\"Left\"",
                             "=",
-                            "\"Left\""
+                            "GetArgumentAsString(\"Direction\")"
                           ]
-                        },
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
                         {
-                          "type": {
-                            "value": "SetObjectVariableAsBoolean"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "__MovingPlatformWalkable__",
-                            "True"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ActivateBehavior"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "Platform",
-                            "yes"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ChangePlan"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "=",
-                            "Object.ZOrder()+1"
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "Create"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object.PointX(\"Left\")",
+                                "Object.PointY(\"Left\")",
+                                "\"\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "LinkedObjects::LinkObjects"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Right\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "False"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ActivateBehavior"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Platform",
+                                "no"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()-1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Left\")+((Variable(__MovingPlatformsCounter__)+1)*Variable(__CalculatedQtySapceX__))",
+                                    "=",
+                                    "Object.PointY(\"Left\")"
+                                  ]
+                                }
+                              ]
+                            }
                           ]
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "folded": true,
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "value": "BuiltinCommonInstructions::CompareStrings"
-                      },
-                      "parameters": [
-                        "\"Right\"",
-                        "=",
-                        "GetArgumentAsString(\"Direction\")"
-                      ]
-                    }
-                  ],
-                  "actions": [],
-                  "events": [
+                    },
                     {
                       "type": "BuiltinCommonInstructions::Standard",
-                      "conditions": [],
-                      "actions": [
+                      "conditions": [
                         {
                           "type": {
-                            "value": "Create"
+                            "value": "BuiltinCommonInstructions::CompareStrings"
                           },
                           "parameters": [
-                            "",
-                            "MovingPlatform",
-                            "Object.PointX(\"Right\")-(Variable(__MovingPlatformsCounter__)*Variable(__CalculatedQtySapceX__))",
-                            "Object.PointY(\"Right\")",
-                            "\"\""
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "LinkedObjects::LinkObjects"
-                          },
-                          "parameters": [
-                            "",
-                            "MovingPlatform",
-                            "Object"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ModVarObjetTxt"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "__MovingPlatformDirection__",
+                            "\"Right\"",
                             "=",
-                            "\"Right\""
+                            "GetArgumentAsString(\"Direction\")"
                           ]
-                        },
+                        }
+                      ],
+                      "actions": [],
+                      "events": [
                         {
-                          "type": {
-                            "value": "SetObjectVariableAsBoolean"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "__MovingPlatformWalkable__",
-                            "True"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ActivateBehavior"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "Platform",
-                            "yes"
-                          ]
-                        },
-                        {
-                          "type": {
-                            "value": "ChangePlan"
-                          },
-                          "parameters": [
-                            "MovingPlatform",
-                            "=",
-                            "Object.ZOrder()+1"
+                          "type": "BuiltinCommonInstructions::Standard",
+                          "conditions": [],
+                          "actions": [
+                            {
+                              "type": {
+                                "value": "Create"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object.PointX(\"Right\")",
+                                "Object.PointY(\"Right\")",
+                                "\"\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "LinkedObjects::LinkObjects"
+                              },
+                              "parameters": [
+                                "",
+                                "MovingPlatform",
+                                "Object"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ModVarObjetTxt"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformDirection__",
+                                "=",
+                                "\"Left\""
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "SetObjectVariableAsBoolean"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "__MovingPlatformWalkable__",
+                                "False"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ActivateBehavior"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "Platform",
+                                "no"
+                              ]
+                            },
+                            {
+                              "type": {
+                                "value": "ChangePlan"
+                              },
+                              "parameters": [
+                                "MovingPlatform",
+                                "=",
+                                "Object.ZOrder()-1"
+                              ]
+                            }
+                          ],
+                          "events": [
+                            {
+                              "type": "BuiltinCommonInstructions::Standard",
+                              "conditions": [],
+                              "actions": [
+                                {
+                                  "type": {
+                                    "value": "MettreXY"
+                                  },
+                                  "parameters": [
+                                    "MovingPlatform",
+                                    "=",
+                                    "Object.PointX(\"Right\")-((Variable(__MovingPlatformsCounter__)+1)*Variable(__CalculatedQtySapceX__))",
+                                    "=",
+                                    "Object.PointY(\"Left\")"
+                                  ]
+                                }
+                              ]
+                            }
                           ]
                         }
                       ]
@@ -787,16 +1075,6 @@
               "optional": false,
               "supplementaryInformation": "[\"Down\",\"Up\",\"Left\",\"Right\"]",
               "type": "stringWithSelector"
-            },
-            {
-              "codeOnly": false,
-              "defaultValue": "",
-              "description": "Debug",
-              "longDescription": "",
-              "name": "Debug",
-              "optional": false,
-              "supplementaryInformation": "TextObject::Text",
-              "type": "objectList"
             }
           ],
           "objectGroups": []
